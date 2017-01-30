@@ -19,4 +19,5 @@ public interface TodolistService {
 
 	List<TaskStatus> listTaskStatus();
 
+	Task terminateTask(long idTask);
 }

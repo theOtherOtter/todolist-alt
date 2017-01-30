@@ -7,8 +7,22 @@
 <title>Todolist</title>
 </head>
 <body>
- 	<c:forEach items="${tasks}" var="task">
-     	<div>${task.name} - ${task.status.name}</div>
-	 </c:forEach>
+	<!-- J'ai choisi de faire sous forme de tableau pour que l'affichage soit plus uniforme -->
+	<table style=" border-collapse:collapse">
+		<!-- Pour chaque tâche, on affiche le nom, le statut, et le bouton pour la terminer -->
+	 	<c:forEach items="${tasks}" var="task">
+		 	<tr>
+		     	<td style="border:1px solid black">
+		     		${task.name} 
+		     	</td>
+		     	<td style="border:1px solid black">
+		     	    ${task.status.name}
+		     	</td>
+		     	<td style="border:1px solid black">
+			     	<a href="/todolist-presentation/terminate/${task.id}">Terminer la tâche</a>
+				</td>
+		    </tr>
+		 </c:forEach>
+	</table>
 </body>
 </html>

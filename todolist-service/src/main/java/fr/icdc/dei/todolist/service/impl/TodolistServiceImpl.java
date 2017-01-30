@@ -82,4 +82,25 @@ public class TodolistServiceImpl implements TodolistService {
 	public List<TaskStatus> listTaskStatus() {
 		return taskStatusDao.findAll();
 	}
+
+	@Override
+	//On termine une tâche
+	public Task terminateTask(long idTask) 
+	{
+		//On recherche la tâche correspondante
+		Task task = taskDao.findOne(idTask);
+		//On prend la date du jour et on retire 7 jours (pour avoir la date d'il y a une semaine)
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -7);
+		//Si la date d'il y a une semaine est supérieure à la date de début de la tâche (qu'elle a été créée il y a plus d'une semaine donc)
+		//et que son statut est différent de FINISHED
+		if ((cal.getTime().getTime() > task.getBeginDate().getTime()) && (task.getStatus().getId() != TaskStatusEnum.FINISHED.getValue())) 
+		{
+			//On set le statut à FINISHED et on save
+			task.setStatus(new TaskStatus(TaskStatusEnum.FINISHED.getValue()));
+			return taskDao.save(task);
+		}
+		//Sinon on retourne la tâche sans changements
+		return task;
+	}
 }

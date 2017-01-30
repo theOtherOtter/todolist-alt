@@ -2,6 +2,7 @@ package fr.icdc.dei.todolist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,4 +41,14 @@ public class TodolistController {
 		return page;
 	}
 
+	@RequestMapping(value = "terminate/{idTask}", method = RequestMethod.GET)
+	//On appelle la méthode terminateTask lors de l'appel du lien http://localhost:8080/todolist-presentation/terminate/{idTask} 
+	//mais on reste sur home
+	public ModelAndView terminateTask(@PathVariable long idTask) 
+	{
+			ModelAndView page = new ModelAndView("Home");
+			todolistService.terminateTask(idTask);
+			page.addObject(TASKS_HTTP_ATTR, todolistService.listTasks());
+			return page;
+	}
 }

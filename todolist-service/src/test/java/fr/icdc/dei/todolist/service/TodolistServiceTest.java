@@ -18,9 +18,13 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	private static final long DELEGATED_TASK_ID = 2L;
 	private static final long USER_ID = 1L;
 	private static final long DELEGATE_USER_ID = 2L;
+	private static final long LESS_THAN_A_WEEK_AGO = 1L;
+	private static final long MORE_THAN_A_WEEK_AGO = 2L;
 	
 	private static User user = new User();
 	private static Task task = new Task();
+	private static Task taskCreatedLessThanAWeekAgo = new Task();
+	private static Task taskCreatedMoreThanAWeekAgo = new Task();
 	
 	@Autowired
 	private TodolistService todolistService;
@@ -29,6 +33,8 @@ public class TodolistServiceTest extends AbstractServiceTest {
 	public static void setUp() {
 		user.setId(USER_ID);
 		task.setId(TASK_TO_AFFECT_ID);
+		taskCreatedLessThanAWeekAgo.setId(LESS_THAN_A_WEEK_AGO);
+		taskCreatedMoreThanAWeekAgo.setId(MORE_THAN_A_WEEK_AGO);
 	}
 	
 	@Test
@@ -61,4 +67,17 @@ public class TodolistServiceTest extends AbstractServiceTest {
 		assertTrue(CollectionUtils.isNotEmpty(todolistService.listTaskStatus()));
 	}
 
+	@Test
+	//On teste la mise à FINISHED d'une tâche ayant passée plus d'une semaine en statut non terminé
+	public void testTerminateTaskWork() 
+	{
+		assertEquals(todolistService.terminateTask(taskCreatedMoreThanAWeekAgo.getId()).getStatus().getId(),TaskStatusEnum.FINISHED.getValue());
+	}
+	
+	@Test
+	/*On teste la non modification d'une tâche ayant passée moins d'une semaine en statut non terminé*/
+	public void testTaskCreatedLessThanAWeekAgoNoChange() 
+	{
+		assertEquals(todolistService.terminateTask(taskCreatedLessThanAWeekAgo.getId()).getStatus().getId(),TaskStatusEnum.STARTED.getValue());
+	}
 }
