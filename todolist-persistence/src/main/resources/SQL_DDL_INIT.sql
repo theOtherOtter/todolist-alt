@@ -24,7 +24,7 @@ CREATE TABLE `tasks` (
   `id_task` bigint(20) NOT NULL,
   `name` varchar(250) NOT NULL,
   `beginDate` date NOT NULL,
-  `closedDate` date NOT NULL,
+  `closedDate` date,
   `id_task_status` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -33,7 +33,7 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id_task`, `name`, `beginDate`, `closedDate`, `id_task_status`) VALUES
-(1, 'Test 1', '2016-11-16', '2016-11-17', 1);
+(1, 'Test 1', '2016-11-16', '2017-01-30', 1);
 
 -- --------------------------------------------------------
 

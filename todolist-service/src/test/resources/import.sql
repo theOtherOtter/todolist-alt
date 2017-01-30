@@ -6,15 +6,15 @@ INSERT INTO tasks_status(name) VALUES ('DELEGATION_PENDING');
 INSERT INTO tasks_status(name) VALUES ('DELEGATED');
 
 -- TASKS
-INSERT INTO tasks(name, id_task_status, closedDate) VALUES ('Hikingyo', 1, NULL);
-INSERT INTO tasks(name, id_task_status, closedDate) VALUES ('StartedTask', 1, NULL);
-INSERT INTO tasks(name, id_task_status, closedDate) VALUES ('FinishedTask', 2, DATE '2016-8-10');
+INSERT INTO tasks(name, id_task_status, closedDate, beginDate) VALUES ('Sarah Connor', 1, NULL, DATE '2017-1-30');
+INSERT INTO tasks(name, id_task_status, closedDate, beginDate) VALUES ('StartedTask', 1, NULL, DATE '2017-1-21');
+INSERT INTO tasks(name, id_task_status, closedDate, beginDate) VALUES ('TerminatedTask', 2, DATE '2016-8-10', DATE '2017-1-21');
 
 -- USERS
 INSERT INTO users(name) VALUES('userTest');
 INSERT INTO users(name) VALUES('delegateUser');
 
 -- TASKS OWNERS
-INSERT INTO tasks_owners(id_task, id_user, id_task_owner_status) VALUES(1, 1, true);
-INSERT INTO tasks_owners(id_task, id_user, id_task_owner_status) VALUES(2, 1, true);
-INSERT INTO tasks_owners(id_task, id_user, id_task_owner_status) VALUES(2, 2, false);
+INSERT INTO tasks_owners(id_task, id_user, id_task_owner, creator) VALUES(1, 2, 2, 3);
+INSERT INTO tasks_owners(id_task, id_user, id_task_owner, creator) VALUES(2, 3, 3, 3);
+INSERT INTO tasks_owners(id_task, id_user, id_task_owner, creator) VALUES(3, 4, 4, 3);
